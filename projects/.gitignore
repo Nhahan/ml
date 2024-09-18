@@ -1,0 +1,115 @@
+# Python 관련
+__pycache__/
+*.py[cod]
+*$py.class
+
+# 가상환경
+venv/
+env/
+.venv/
+.env/
+ENV/
+env.bak/
+venv.bak/
+
+# 패키지 빌드 결과
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# Jupyter Notebook 체크포인트
+.ipynb_checkpoints/
+
+# 데이터 파일 (데이터 디렉토리 이름은 프로젝트에 따라 조정)
+data/
+*.csv
+*.hdf5
+*.h5
+*.pickle
+*.pkl
+
+# 모델 저장 파일
+*.model
+*.pth
+*.pt
+*.hdf5
+
+# 로그 파일
+*.log
+
+# 설정 파일
+*.env
+*.ini
+*.cfg
+*.conf
+
+# IDE 및 에디터 설정
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# OS별 파일
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# 기타
+*.swp
+*.swo
+*.bak
+*.tmp
+
+# 캐시 파일
+.cache/
+.pytest_cache/
+.coverage
+.coverage.*
+.cache/
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+
+# Docker 관련
+Dockerfile
+docker-compose.yml
+
+# 기타 환경 설정
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# PyCharm
+# (이미 .idea/에 포함되지만, 특정 파일 추가 가능)
+*.iml
+
+# Spyder project settings
+.spyderproject
+.spyproject
+
+# Rope project settings
+.ropeproject
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Pyre type checker
+.pyre/
+
+# Cython debug symbols
+cython_debug/
