@@ -1,0 +1,255 @@
+SGD Optimizer Training Started
+SGD - Epoch [1/50], Loss: 2.2982, Train Acc: 17.24%
+SGD - Epoch [2/50], Loss: 2.2822, Train Acc: 20.63%
+SGD - Epoch [3/50], Loss: 2.2663, Train Acc: 23.17%
+SGD - Epoch [4/50], Loss: 2.2502, Train Acc: 24.26%
+SGD - Epoch [5/50], Loss: 2.2336, Train Acc: 24.79%
+SGD - Epoch [6/50], Loss: 2.2162, Train Acc: 25.12%
+SGD - Epoch [7/50], Loss: 2.1980, Train Acc: 25.34%
+SGD - Epoch [8/50], Loss: 2.1794, Train Acc: 25.60%
+SGD - Epoch [9/50], Loss: 2.1607, Train Acc: 25.92%
+SGD - Epoch [10/50], Loss: 2.1423, Train Acc: 26.25%
+SGD - Epoch [11/50], Loss: 2.1244, Train Acc: 26.60%
+SGD - Epoch [12/50], Loss: 2.1073, Train Acc: 26.98%
+SGD - Epoch [13/50], Loss: 2.0911, Train Acc: 27.48%
+SGD - Epoch [14/50], Loss: 2.0755, Train Acc: 27.94%
+SGD - Epoch [15/50], Loss: 2.0605, Train Acc: 28.54%
+SGD - Epoch [16/50], Loss: 2.0461, Train Acc: 29.10%
+SGD - Epoch [17/50], Loss: 2.0321, Train Acc: 29.59%
+SGD - Epoch [18/50], Loss: 2.0186, Train Acc: 30.01%
+SGD - Epoch [19/50], Loss: 2.0055, Train Acc: 30.41%
+SGD - Epoch [20/50], Loss: 1.9927, Train Acc: 30.84%
+SGD - Epoch [21/50], Loss: 1.9804, Train Acc: 31.20%
+SGD - Epoch [22/50], Loss: 1.9685, Train Acc: 31.56%
+SGD - Epoch [23/50], Loss: 1.9570, Train Acc: 31.95%
+SGD - Epoch [24/50], Loss: 1.9459, Train Acc: 32.29%
+SGD - Epoch [25/50], Loss: 1.9352, Train Acc: 32.63%
+SGD - Epoch [26/50], Loss: 1.9250, Train Acc: 32.92%
+SGD - Epoch [27/50], Loss: 1.9151, Train Acc: 33.22%
+SGD - Epoch [28/50], Loss: 1.9056, Train Acc: 33.56%
+SGD - Epoch [29/50], Loss: 1.8964, Train Acc: 33.84%
+SGD - Epoch [30/50], Loss: 1.8876, Train Acc: 34.17%
+SGD - Epoch [31/50], Loss: 1.8792, Train Acc: 34.39%
+SGD - Epoch [32/50], Loss: 1.8711, Train Acc: 34.71%
+SGD - Epoch [33/50], Loss: 1.8633, Train Acc: 34.91%
+SGD - Epoch [34/50], Loss: 1.8558, Train Acc: 35.13%
+SGD - Epoch [35/50], Loss: 1.8486, Train Acc: 35.36%
+SGD - Epoch [36/50], Loss: 1.8417, Train Acc: 35.64%
+SGD - Epoch [37/50], Loss: 1.8351, Train Acc: 35.83%
+SGD - Epoch [38/50], Loss: 1.8286, Train Acc: 36.04%
+SGD - Epoch [39/50], Loss: 1.8224, Train Acc: 36.21%
+SGD - Epoch [40/50], Loss: 1.8164, Train Acc: 36.44%
+SGD - Epoch [41/50], Loss: 1.8106, Train Acc: 36.60%
+SGD - Epoch [42/50], Loss: 1.8049, Train Acc: 36.81%
+SGD - Epoch [43/50], Loss: 1.7994, Train Acc: 36.93%
+SGD - Epoch [44/50], Loss: 1.7941, Train Acc: 37.10%
+SGD - Epoch [45/50], Loss: 1.7889, Train Acc: 37.28%
+SGD - Epoch [46/50], Loss: 1.7838, Train Acc: 37.47%
+SGD - Epoch [47/50], Loss: 1.7788, Train Acc: 37.62%
+SGD - Epoch [48/50], Loss: 1.7740, Train Acc: 37.77%
+SGD - Epoch [49/50], Loss: 1.7692, Train Acc: 37.89%
+SGD - Epoch [50/50], Loss: 1.7645, Train Acc: 38.04%
+Adam Optimizer Training Started
+Adam - Epoch [1/50], Loss: 1.6312, Train Acc: 48.95%
+Adam - Epoch [2/50], Loss: 1.4058, Train Acc: 54.41%
+Adam - Epoch [3/50], Loss: 1.2811, Train Acc: 59.12%
+Adam - Epoch [4/50], Loss: 1.1718, Train Acc: 62.53%
+Adam - Epoch [5/50], Loss: 1.0809, Train Acc: 67.71%
+Adam - Epoch [6/50], Loss: 0.9808, Train Acc: 70.57%
+Adam - Epoch [7/50], Loss: 0.8863, Train Acc: 73.82%
+Adam - Epoch [8/50], Loss: 0.7971, Train Acc: 77.28%
+Adam - Epoch [9/50], Loss: 0.6976, Train Acc: 80.35%
+Adam - Epoch [10/50], Loss: 0.6241, Train Acc: 83.19%
+Adam - Epoch [11/50], Loss: 0.5352, Train Acc: 85.89%
+Adam - Epoch [12/50], Loss: 0.4542, Train Acc: 87.22%
+Adam - Epoch [13/50], Loss: 0.4046, Train Acc: 89.86%
+Adam - Epoch [14/50], Loss: 0.3447, Train Acc: 91.06%
+Adam - Epoch [15/50], Loss: 0.3006, Train Acc: 91.59%
+Adam - Epoch [16/50], Loss: 0.2722, Train Acc: 91.46%
+Adam - Epoch [17/50], Loss: 0.2345, Train Acc: 92.42%
+Adam - Epoch [18/50], Loss: 0.2216, Train Acc: 93.25%
+Adam - Epoch [19/50], Loss: 0.2103, Train Acc: 94.53%
+Adam - Epoch [20/50], Loss: 0.2075, Train Acc: 94.51%
+Adam - Epoch [21/50], Loss: 0.1774, Train Acc: 96.24%
+Adam - Epoch [22/50], Loss: 0.1649, Train Acc: 96.05%
+Adam - Epoch [23/50], Loss: 0.1629, Train Acc: 94.75%
+Adam - Epoch [24/50], Loss: 0.1462, Train Acc: 95.47%
+Adam - Epoch [25/50], Loss: 0.1566, Train Acc: 95.02%
+Adam - Epoch [26/50], Loss: 0.1447, Train Acc: 95.88%
+Adam - Epoch [27/50], Loss: 0.1363, Train Acc: 95.97%
+Adam - Epoch [28/50], Loss: 0.1480, Train Acc: 95.69%
+Adam - Epoch [29/50], Loss: 0.1483, Train Acc: 96.22%
+Adam - Epoch [30/50], Loss: 0.1341, Train Acc: 96.22%
+Adam - Epoch [31/50], Loss: 0.1137, Train Acc: 96.81%
+Adam - Epoch [32/50], Loss: 0.1080, Train Acc: 96.37%
+Adam - Epoch [33/50], Loss: 0.1299, Train Acc: 96.76%
+Adam - Epoch [34/50], Loss: 0.1316, Train Acc: 96.01%
+Adam - Epoch [35/50], Loss: 0.1273, Train Acc: 96.85%
+Adam - Epoch [36/50], Loss: 0.1084, Train Acc: 97.13%
+Adam - Epoch [37/50], Loss: 0.1185, Train Acc: 96.58%
+Adam - Epoch [38/50], Loss: 0.1165, Train Acc: 97.02%
+Adam - Epoch [39/50], Loss: 0.1025, Train Acc: 98.01%
+Adam - Epoch [40/50], Loss: 0.0998, Train Acc: 96.78%
+Adam - Epoch [41/50], Loss: 0.1189, Train Acc: 96.90%
+Adam - Epoch [42/50], Loss: 0.1234, Train Acc: 97.15%
+Adam - Epoch [43/50], Loss: 0.1013, Train Acc: 97.87%
+Adam - Epoch [44/50], Loss: 0.0934, Train Acc: 97.42%
+Adam - Epoch [45/50], Loss: 0.1019, Train Acc: 97.54%
+Adam - Epoch [46/50], Loss: 0.1057, Train Acc: 97.23%
+Adam - Epoch [47/50], Loss: 0.0987, Train Acc: 97.26%
+Adam - Epoch [48/50], Loss: 0.0899, Train Acc: 98.36%
+Adam - Epoch [49/50], Loss: 0.0820, Train Acc: 97.33%
+Adam - Epoch [50/50], Loss: 0.0835, Train Acc: 97.48%
+LeakyReLU Model Training Started
+LeakyReLU - Epoch [1/50], Loss: 1.6347, Train Acc: 50.41%
+LeakyReLU - Epoch [2/50], Loss: 1.4005, Train Acc: 54.68%
+LeakyReLU - Epoch [3/50], Loss: 1.2858, Train Acc: 58.48%
+LeakyReLU - Epoch [4/50], Loss: 1.1777, Train Acc: 62.49%
+LeakyReLU - Epoch [5/50], Loss: 1.0787, Train Acc: 67.22%
+LeakyReLU - Epoch [6/50], Loss: 0.9889, Train Acc: 70.05%
+LeakyReLU - Epoch [7/50], Loss: 0.8883, Train Acc: 73.36%
+LeakyReLU - Epoch [8/50], Loss: 0.8002, Train Acc: 76.24%
+LeakyReLU - Epoch [9/50], Loss: 0.7058, Train Acc: 79.60%
+LeakyReLU - Epoch [10/50], Loss: 0.6188, Train Acc: 83.18%
+LeakyReLU - Epoch [11/50], Loss: 0.5269, Train Acc: 85.45%
+LeakyReLU - Epoch [12/50], Loss: 0.4593, Train Acc: 86.92%
+LeakyReLU - Epoch [13/50], Loss: 0.4149, Train Acc: 89.36%
+LeakyReLU - Epoch [14/50], Loss: 0.3623, Train Acc: 90.24%
+LeakyReLU - Epoch [15/50], Loss: 0.2989, Train Acc: 91.25%
+LeakyReLU - Epoch [16/50], Loss: 0.2766, Train Acc: 92.55%
+LeakyReLU - Epoch [17/50], Loss: 0.2465, Train Acc: 92.95%
+LeakyReLU - Epoch [18/50], Loss: 0.2206, Train Acc: 94.88%
+LeakyReLU - Epoch [19/50], Loss: 0.2101, Train Acc: 93.51%
+LeakyReLU - Epoch [20/50], Loss: 0.1892, Train Acc: 95.79%
+LeakyReLU - Epoch [21/50], Loss: 0.1769, Train Acc: 94.97%
+LeakyReLU - Epoch [22/50], Loss: 0.1824, Train Acc: 93.84%
+LeakyReLU - Epoch [23/50], Loss: 0.1670, Train Acc: 95.74%
+LeakyReLU - Epoch [24/50], Loss: 0.1636, Train Acc: 95.96%
+LeakyReLU - Epoch [25/50], Loss: 0.1507, Train Acc: 96.64%
+LeakyReLU - Epoch [26/50], Loss: 0.1336, Train Acc: 94.77%
+LeakyReLU - Epoch [27/50], Loss: 0.1303, Train Acc: 96.26%
+LeakyReLU - Epoch [28/50], Loss: 0.1566, Train Acc: 96.12%
+LeakyReLU - Epoch [29/50], Loss: 0.1447, Train Acc: 96.40%
+LeakyReLU - Epoch [30/50], Loss: 0.1344, Train Acc: 96.65%
+LeakyReLU - Epoch [31/50], Loss: 0.1176, Train Acc: 96.83%
+LeakyReLU - Epoch [32/50], Loss: 0.1312, Train Acc: 96.53%
+LeakyReLU - Epoch [33/50], Loss: 0.1166, Train Acc: 96.31%
+LeakyReLU - Epoch [34/50], Loss: 0.1316, Train Acc: 95.86%
+LeakyReLU - Epoch [35/50], Loss: 0.1086, Train Acc: 96.73%
+LeakyReLU - Epoch [36/50], Loss: 0.0944, Train Acc: 97.43%
+LeakyReLU - Epoch [37/50], Loss: 0.0954, Train Acc: 96.92%
+LeakyReLU - Epoch [38/50], Loss: 0.1295, Train Acc: 96.38%
+LeakyReLU - Epoch [39/50], Loss: 0.1543, Train Acc: 95.11%
+LeakyReLU - Epoch [40/50], Loss: 0.1251, Train Acc: 97.28%
+LeakyReLU - Epoch [41/50], Loss: 0.0735, Train Acc: 97.80%
+LeakyReLU - Epoch [42/50], Loss: 0.0839, Train Acc: 98.02%
+LeakyReLU - Epoch [43/50], Loss: 0.0900, Train Acc: 97.01%
+LeakyReLU - Epoch [44/50], Loss: 0.1105, Train Acc: 96.78%
+LeakyReLU - Epoch [45/50], Loss: 0.1314, Train Acc: 96.76%
+LeakyReLU - Epoch [46/50], Loss: 0.1229, Train Acc: 97.24%
+LeakyReLU - Epoch [47/50], Loss: 0.0917, Train Acc: 97.76%
+LeakyReLU - Epoch [48/50], Loss: 0.0803, Train Acc: 97.63%
+LeakyReLU - Epoch [49/50], Loss: 0.0861, Train Acc: 97.75%
+LeakyReLU - Epoch [50/50], Loss: 0.1024, Train Acc: 97.59%
+Sigmoid Model Training Started
+Sigmoid - Epoch [1/50], Loss: 1.7856, Train Acc: 44.04%
+Sigmoid - Epoch [2/50], Loss: 1.5630, Train Acc: 48.67%
+Sigmoid - Epoch [3/50], Loss: 1.4466, Train Acc: 52.36%
+Sigmoid - Epoch [4/50], Loss: 1.3538, Train Acc: 55.59%
+Sigmoid - Epoch [5/50], Loss: 1.2684, Train Acc: 58.73%
+Sigmoid - Epoch [6/50], Loss: 1.1841, Train Acc: 62.66%
+Sigmoid - Epoch [7/50], Loss: 1.0951, Train Acc: 65.63%
+Sigmoid - Epoch [8/50], Loss: 1.0097, Train Acc: 69.59%
+Sigmoid - Epoch [9/50], Loss: 0.9102, Train Acc: 71.87%
+Sigmoid - Epoch [10/50], Loss: 0.8267, Train Acc: 77.29%
+Sigmoid - Epoch [11/50], Loss: 0.7317, Train Acc: 80.45%
+Sigmoid - Epoch [12/50], Loss: 0.6475, Train Acc: 81.57%
+Sigmoid - Epoch [13/50], Loss: 0.5877, Train Acc: 85.19%
+Sigmoid - Epoch [14/50], Loss: 0.5150, Train Acc: 86.36%
+Sigmoid - Epoch [15/50], Loss: 0.4355, Train Acc: 89.17%
+Sigmoid - Epoch [16/50], Loss: 0.3808, Train Acc: 89.15%
+Sigmoid - Epoch [17/50], Loss: 0.3262, Train Acc: 92.19%
+Sigmoid - Epoch [18/50], Loss: 0.2738, Train Acc: 93.94%
+Sigmoid - Epoch [19/50], Loss: 0.2627, Train Acc: 94.72%
+Sigmoid - Epoch [20/50], Loss: 0.2225, Train Acc: 94.50%
+Sigmoid - Epoch [21/50], Loss: 0.1842, Train Acc: 94.91%
+Sigmoid - Epoch [22/50], Loss: 0.1788, Train Acc: 95.25%
+Sigmoid - Epoch [23/50], Loss: 0.1698, Train Acc: 96.78%
+Sigmoid - Epoch [24/50], Loss: 0.1297, Train Acc: 97.49%
+Sigmoid - Epoch [25/50], Loss: 0.1126, Train Acc: 96.17%
+Sigmoid - Epoch [26/50], Loss: 0.1195, Train Acc: 96.28%
+Sigmoid - Epoch [27/50], Loss: 0.1111, Train Acc: 97.51%
+Sigmoid - Epoch [28/50], Loss: 0.1274, Train Acc: 95.55%
+Sigmoid - Epoch [29/50], Loss: 0.1135, Train Acc: 98.41%
+Sigmoid - Epoch [30/50], Loss: 0.0782, Train Acc: 98.01%
+Sigmoid - Epoch [31/50], Loss: 0.0901, Train Acc: 98.24%
+Sigmoid - Epoch [32/50], Loss: 0.1013, Train Acc: 97.25%
+Sigmoid - Epoch [33/50], Loss: 0.0940, Train Acc: 98.60%
+Sigmoid - Epoch [34/50], Loss: 0.0727, Train Acc: 98.38%
+Sigmoid - Epoch [35/50], Loss: 0.0850, Train Acc: 97.57%
+Sigmoid - Epoch [36/50], Loss: 0.1066, Train Acc: 98.70%
+Sigmoid - Epoch [37/50], Loss: 0.0562, Train Acc: 98.41%
+Sigmoid - Epoch [38/50], Loss: 0.0717, Train Acc: 98.53%
+Sigmoid - Epoch [39/50], Loss: 0.0599, Train Acc: 98.16%
+Sigmoid - Epoch [40/50], Loss: 0.0718, Train Acc: 97.46%
+Sigmoid - Epoch [41/50], Loss: 0.0723, Train Acc: 98.50%
+Sigmoid - Epoch [42/50], Loss: 0.0696, Train Acc: 98.14%
+Sigmoid - Epoch [43/50], Loss: 0.0653, Train Acc: 98.26%
+Sigmoid - Epoch [44/50], Loss: 0.0638, Train Acc: 98.63%
+Sigmoid - Epoch [45/50], Loss: 0.0424, Train Acc: 99.38%
+Sigmoid - Epoch [46/50], Loss: 0.0495, Train Acc: 98.10%
+Sigmoid - Epoch [47/50], Loss: 0.0989, Train Acc: 97.13%
+Sigmoid - Epoch [48/50], Loss: 0.0701, Train Acc: 98.50%
+Sigmoid - Epoch [49/50], Loss: 0.0595, Train Acc: 97.87%
+Sigmoid - Epoch [50/50], Loss: 0.0810, Train Acc: 97.90%
+Dropout Model Training Started
+Dropout - Epoch [1/50], Loss: 1.6603, Train Acc: 47.80%, Test Acc: 45.71%
+Dropout - Epoch [2/50], Loss: 1.4524, Train Acc: 54.41%, Test Acc: 50.91%
+Dropout - Epoch [3/50], Loss: 1.3332, Train Acc: 56.52%, Test Acc: 50.82%
+Dropout - Epoch [4/50], Loss: 1.2439, Train Acc: 59.66%, Test Acc: 52.56%
+Dropout - Epoch [5/50], Loss: 1.1729, Train Acc: 64.56%, Test Acc: 54.24%
+Dropout - Epoch [6/50], Loss: 1.0999, Train Acc: 66.64%, Test Acc: 54.23%
+Dropout - Epoch [7/50], Loss: 1.0285, Train Acc: 70.10%, Test Acc: 55.14%
+Dropout - Epoch [8/50], Loss: 0.9594, Train Acc: 72.33%, Test Acc: 55.15%
+Dropout - Epoch [9/50], Loss: 0.8971, Train Acc: 75.07%, Test Acc: 54.76%
+Dropout - Epoch [10/50], Loss: 0.8293, Train Acc: 77.14%, Test Acc: 55.05%
+Dropout - Epoch [11/50], Loss: 0.7653, Train Acc: 80.21%, Test Acc: 55.85%
+Dropout - Epoch [12/50], Loss: 0.7150, Train Acc: 81.46%, Test Acc: 54.92%
+Dropout - Epoch [13/50], Loss: 0.6614, Train Acc: 83.10%, Test Acc: 55.71%
+Dropout - Epoch [14/50], Loss: 0.6066, Train Acc: 84.41%, Test Acc: 54.82%
+Dropout - Epoch [15/50], Loss: 0.5650, Train Acc: 86.67%, Test Acc: 55.12%
+Dropout - Epoch [16/50], Loss: 0.5213, Train Acc: 88.20%, Test Acc: 55.76%
+Dropout - Epoch [17/50], Loss: 0.4883, Train Acc: 89.52%, Test Acc: 56.03%
+Dropout - Epoch [18/50], Loss: 0.4710, Train Acc: 90.06%, Test Acc: 54.89%
+Dropout - Epoch [19/50], Loss: 0.4279, Train Acc: 90.94%, Test Acc: 55.65%
+Dropout - Epoch [20/50], Loss: 0.4122, Train Acc: 91.43%, Test Acc: 55.95%
+Dropout - Epoch [21/50], Loss: 0.3823, Train Acc: 92.33%, Test Acc: 55.71%
+Dropout - Epoch [22/50], Loss: 0.3772, Train Acc: 92.09%, Test Acc: 54.84%
+Dropout - Epoch [23/50], Loss: 0.3582, Train Acc: 93.78%, Test Acc: 55.19%
+Dropout - Epoch [24/50], Loss: 0.3338, Train Acc: 93.88%, Test Acc: 56.14%
+Dropout - Epoch [25/50], Loss: 0.3236, Train Acc: 94.52%, Test Acc: 55.87%
+Dropout - Epoch [26/50], Loss: 0.3074, Train Acc: 94.74%, Test Acc: 55.92%
+Dropout - Epoch [27/50], Loss: 0.3006, Train Acc: 94.95%, Test Acc: 55.18%
+Dropout - Epoch [28/50], Loss: 0.2861, Train Acc: 94.96%, Test Acc: 55.43%
+Dropout - Epoch [29/50], Loss: 0.2768, Train Acc: 95.70%, Test Acc: 55.37%
+Dropout - Epoch [30/50], Loss: 0.2737, Train Acc: 96.22%, Test Acc: 55.79%
+Dropout - Epoch [31/50], Loss: 0.2719, Train Acc: 95.15%, Test Acc: 55.86%
+Dropout - Epoch [32/50], Loss: 0.2589, Train Acc: 96.09%, Test Acc: 55.59%
+Dropout - Epoch [33/50], Loss: 0.2605, Train Acc: 95.91%, Test Acc: 55.77%
+Dropout - Epoch [34/50], Loss: 0.2520, Train Acc: 96.26%, Test Acc: 55.56%
+Dropout - Epoch [35/50], Loss: 0.2467, Train Acc: 96.66%, Test Acc: 55.50%
+Dropout - Epoch [36/50], Loss: 0.2406, Train Acc: 95.55%, Test Acc: 55.45%
+Dropout - Epoch [37/50], Loss: 0.2285, Train Acc: 97.14%, Test Acc: 55.65%
+Dropout - Epoch [38/50], Loss: 0.2277, Train Acc: 96.44%, Test Acc: 55.58%
+Dropout - Epoch [39/50], Loss: 0.2081, Train Acc: 97.02%, Test Acc: 55.69%
+Dropout - Epoch [40/50], Loss: 0.2081, Train Acc: 97.24%, Test Acc: 55.85%
+Dropout - Epoch [41/50], Loss: 0.2050, Train Acc: 97.74%, Test Acc: 55.99%
+Dropout - Epoch [42/50], Loss: 0.2069, Train Acc: 97.05%, Test Acc: 55.47%
+Dropout - Epoch [43/50], Loss: 0.2111, Train Acc: 97.27%, Test Acc: 55.35%
+Dropout - Epoch [44/50], Loss: 0.2087, Train Acc: 96.89%, Test Acc: 54.84%
+Dropout - Epoch [45/50], Loss: 0.2025, Train Acc: 97.84%, Test Acc: 55.29%
+Dropout - Epoch [46/50], Loss: 0.2002, Train Acc: 97.09%, Test Acc: 55.71%
+Dropout - Epoch [47/50], Loss: 0.1941, Train Acc: 97.65%, Test Acc: 55.68%
+Dropout - Epoch [48/50], Loss: 0.1877, Train Acc: 97.60%, Test Acc: 56.52%
+Dropout - Epoch [49/50], Loss: 0.1813, Train Acc: 97.82%, Test Acc: 55.69%
+Dropout - Epoch [50/50], Loss: 0.1883, Train Acc: 97.79%, Test Acc: 55.70%
