@@ -84,7 +84,7 @@ graph_filename = f"{script_name_without_ext}_{timestamp}.png"
 log_filename = f"{script_name_without_ext}_{timestamp}.txt"
 
 # result 디렉토리 생성
-result_dir = './result'
+result_dir = './result/1_basic'
 if not os.path.exists(result_dir):
     os.makedirs(result_dir)
 
