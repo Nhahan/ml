@@ -1,6 +1,5 @@
-import os
-import sys
 import logging
+import os
 from math import sqrt
 
 import numpy as np
