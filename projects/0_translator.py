@@ -1,6 +1,9 @@
 import logging
 import os
+from datetime import datetime
+
 import evaluate
+import matplotlib.pyplot as plt
 import numpy as np
 import torch
 from datasets import load_dataset, concatenate_datasets
@@ -12,8 +15,6 @@ from transformers import (
     EarlyStoppingCallback,
     DataCollatorForSeq2Seq,
 )
-import matplotlib.pyplot as plt
-from datetime import datetime
 
 # 현재 파일명과 타임스탬프 생성
 current_file_name = os.path.basename(__file__).replace('.py', '')
@@ -43,6 +44,10 @@ else:
 # 토크나이저 로드
 tokenizer = BertTokenizerFast.from_pretrained("bert-base-multilingual-cased")
 
+# pad_token 설정 확인 및 설정
+if tokenizer.pad_token is None:
+    tokenizer.pad_token = tokenizer.eos_token
+
 # 모델 로드 및 설정
 model = EncoderDecoderModel.from_encoder_decoder_pretrained(
     "bert-base-multilingual-cased",
@@ -50,6 +55,7 @@ model = EncoderDecoderModel.from_encoder_decoder_pretrained(
 )
 
 # 모델 설정 조정
+model.config.pad_token_id = tokenizer.pad_token_id
 model.config.decoder_start_token_id = tokenizer.cls_token_id
 model.config.eos_token_id = tokenizer.sep_token_id
 model.config.max_length = 128
@@ -67,24 +73,20 @@ model.to(device)
 # 데이터셋 로드
 korean_parallel_corpora = load_dataset("Moo/korean-parallel-corpora")
 ted_talks_dataset = load_dataset("msarmi9/korean-english-multitarget-ted-talks-task")
-korean_parallel_sentences = load_dataset("lemon-mint/korean_parallel_sentences_v1.1")
 
 # 데이터셋 병합
 train_dataset = concatenate_datasets([
     korean_parallel_corpora["train"],
     ted_talks_dataset["train"],
-    korean_parallel_sentences["train"],
 ])
 eval_dataset = concatenate_datasets([
     korean_parallel_corpora["test"],
     ted_talks_dataset["validation"],
-    korean_parallel_sentences["train"],
 ])
 
 
 # 데이터 전처리 함수 정의
 def preprocess_function(examples):
-    # 각 데이터셋의 열 이름에 따라 입력 및 타겟 설정
     if 'ko' in examples and 'en' in examples:
         inputs = examples['ko']
         targets = examples['en']
@@ -118,12 +120,12 @@ tokenized_train_dataset = train_dataset.map(
     batched=True,
     remove_columns=train_dataset.column_names,
 )
-
 tokenized_eval_dataset = eval_dataset.map(
     preprocess_function,
     batched=True,
     remove_columns=eval_dataset.column_names,
 )
+
 
 # 평가 메트릭 설정
 bleu_metric = evaluate.load("sacrebleu")
@@ -135,7 +137,6 @@ def compute_metrics(eval_preds):
     preds, labels = eval_preds
 
     decoded_preds = tokenizer.batch_decode(preds, skip_special_tokens=True)
-
     labels = np.where(labels != -100, labels, tokenizer.pad_token_id)
     decoded_labels = tokenizer.batch_decode(labels, skip_special_tokens=True)
 
@@ -152,10 +153,17 @@ def compute_metrics(eval_preds):
 
 
 # 데이터 콜레이터 설정
-data_collator = DataCollatorForSeq2Seq(tokenizer, model=model, padding='max_length', max_length=128)
+data_collator = DataCollatorForSeq2Seq(
+    tokenizer,
+    model=model,
+    padding='max_length',
+    max_length=128,
+    pad_to_multiple_of=None,
+    return_tensors="pt"
+)
 
 # 조기 종료 콜백 설정
-early_stopping_callback = EarlyStoppingCallback(early_stopping_patience=3)
+early_stopping_callback = EarlyStoppingCallback(early_stopping_patience=2)
 
 # 체크포인트 경로 확인 및 설정
 checkpoint_dir = None
@@ -165,15 +173,14 @@ if os.path.exists(os.path.join(log_dir, "checkpoint")):
 # 훈련 인자 설정
 training_args = Seq2SeqTrainingArguments(
     output_dir=log_dir,
-    evaluation_strategy="epoch",
+    eval_strategy="epoch",
     save_strategy="epoch",
     save_steps=500,
     logging_strategy="steps",
     logging_steps=50,
     per_device_train_batch_size=32,
     per_device_eval_batch_size=32,
-    num_train_epochs=10,  # 초기 epoch 수를 줄임
-    gradient_accumulation_steps=2,
+    num_train_epochs=5,
     learning_rate=3e-4,
     save_total_limit=5,
     predict_with_generate=True,
@@ -205,7 +212,7 @@ with open(os.path.join(log_dir, f'training_log_{current_file_name}_{timestamp}.t
         f.write(f"{log}\n")
 
 # 모델 저장
-trainer.save_model(os.path.join(log_dir, "trained_model"))  # trainer.save_model() 사용
+trainer.save_model(os.path.join(log_dir, "trained_model"))
 tokenizer.save_pretrained(os.path.join(log_dir, "trained_model"))
 
 
