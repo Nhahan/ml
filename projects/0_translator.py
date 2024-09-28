@@ -1,15 +1,14 @@
-# 필요한 라이브러리 임포트
 import torch
 from transformers import (
     BertTokenizerFast,
     EncoderDecoderModel,
-    Seq2SeqTrainer,                # 수정된 부분
-    Seq2SeqTrainingArguments,      # 수정된 부분
+    Seq2SeqTrainer,
+    Seq2SeqTrainingArguments,
     EarlyStoppingCallback,
     DataCollatorForSeq2Seq,
 )
 from datasets import load_dataset, concatenate_datasets
-import evaluate                    # 수정된 부분
+import evaluate
 import logging
 import numpy as np
 
@@ -23,7 +22,12 @@ logging.basicConfig(
 
 # GPU 장치 설정
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-logging.info(f"Using device: {device}")
+if device.type == "cuda":
+    gpu_name = torch.cuda.get_device_name(0)
+    gpu_mem = torch.cuda.get_device_properties(0).total_memory // (1024 ** 3)
+    logging.info(f"Using device: {device} (GPU: {gpu_name}, Memory: {gpu_mem} GB)")
+else:
+    logging.info(f"Using device: {device}")
 
 # 토크나이저 로드
 tokenizer = BertTokenizerFast.from_pretrained("bert-base-multilingual-cased")
