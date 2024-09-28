@@ -191,7 +191,7 @@ training_args = Seq2SeqTrainingArguments(
 )
 
 
-# Custom Seq2SeqTrainer 클래스 정의
+# Custom Seq2SeqTrainer 클래스 정의 (로그 기록용)
 class CustomSeq2SeqTrainer(Seq2SeqTrainer):
     def log(self, logs):
         super().log(logs)  # 기본 로그 처리
