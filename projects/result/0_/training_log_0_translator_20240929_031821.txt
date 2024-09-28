@@ -1,1 +1,0 @@
-2024-09-29 03:18:21,640 - INFO - Using device: cuda (GPU: NVIDIA GeForce RTX 2080 SUPER, Memory: 7 GB)

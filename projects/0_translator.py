@@ -126,7 +126,6 @@ tokenized_eval_dataset = eval_dataset.map(
     remove_columns=eval_dataset.column_names,
 )
 
-
 # 평가 메트릭 설정
 bleu_metric = evaluate.load("sacrebleu")
 meteor_metric = evaluate.load("meteor")
@@ -191,8 +190,18 @@ training_args = Seq2SeqTrainingArguments(
     greater_is_better=False,
 )
 
+
+# Custom Seq2SeqTrainer 클래스 정의
+class CustomSeq2SeqTrainer(Seq2SeqTrainer):
+    def log(self, logs):
+        super().log(logs)  # 기본 로그 처리
+        # 로그 파일에 기록
+        with open(os.path.join(log_dir, f'training_log_{current_file_name}_{timestamp}.txt'), 'a') as f:
+            f.write(f"{logs}\n")
+
+
 # 트레이너 초기화
-trainer = Seq2SeqTrainer(
+trainer = CustomSeq2SeqTrainer(
     model=model,
     args=training_args,
     train_dataset=tokenized_train_dataset,
@@ -205,11 +214,6 @@ trainer = Seq2SeqTrainer(
 
 # 모델 훈련 (체크포인트 있을 시, 체크포인트에서 학습 재개)
 trainer.train(resume_from_checkpoint=checkpoint_dir)
-
-# 훈련 로그 저장
-with open(os.path.join(log_dir, f'training_log_{current_file_name}_{timestamp}.txt'), 'a') as f:
-    for log in trainer.state.log_history:
-        f.write(f"{log}\n")
 
 # 모델 저장
 trainer.save_model(os.path.join(log_dir, "trained_model"))
