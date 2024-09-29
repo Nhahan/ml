@@ -198,7 +198,7 @@ data_collator = DataCollatorForSeq2Seq(
 )
 
 # 조기 종료 콜백 설정
-early_stopping_callback = EarlyStoppingCallback(early_stopping_patience=4)
+early_stopping_callback = EarlyStoppingCallback(early_stopping_patience=3)
 
 # 체크포인트 경로 확인 및 설정
 checkpoint_dir = None
@@ -213,9 +213,9 @@ training_args = Seq2SeqTrainingArguments(
     save_steps=500,
     logging_strategy="steps",
     logging_steps=500,
-    per_device_train_batch_size=32,
-    per_device_eval_batch_size=32,
-    num_train_epochs=30,
+    per_device_train_batch_size=28,
+    per_device_eval_batch_size=28,
+    num_train_epochs=10,
     learning_rate=5e-5,
     weight_decay=0.01,
     save_total_limit=5,
