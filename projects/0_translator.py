@@ -50,6 +50,7 @@ model.to(device)
 # 모델 설정 조정
 model.config.max_length = 128
 model.config.no_repeat_ngram_size = 3
+model.config.dropout_rate = 0.1
 
 
 # 컬럼 이름 확인 및 전처리
