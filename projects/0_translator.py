@@ -5,11 +5,11 @@ from datetime import datetime
 import evaluate
 import matplotlib.pyplot as plt
 import numpy as np
-import torch
-from datasets import load_dataset, concatenate_datasets
+import torch.quantization
+from datasets import load_dataset, concatenate_datasets, load_from_disk
 from transformers import (
-    MarianTokenizer,
-    MarianMTModel,
+    T5ForConditionalGeneration,
+    T5Tokenizer,
     Seq2SeqTrainer,
     Seq2SeqTrainingArguments,
     EarlyStoppingCallback,
@@ -41,31 +41,75 @@ if device.type == "cuda":
 else:
     logging.info(f"Using device: {device}")
 
-# 토크나이저 로드
-model_name = "Helsinki-NLP/opus-mt-ko-en"
-tokenizer = MarianTokenizer.from_pretrained(model_name)
-
-# 모델 로드 및 설정
-model = MarianMTModel.from_pretrained(model_name)
+# 토크나이저 및 모델 로드
+model_name = "t5-small"
+tokenizer = T5Tokenizer.from_pretrained(model_name, legacy=False)
+model = T5ForConditionalGeneration.from_pretrained(model_name)
 model.to(device)
 
 # 모델 설정 조정
 model.config.max_length = 128
 model.config.no_repeat_ngram_size = 3
 
+
+# 컬럼 이름 확인 및 전처리
+def preprocess_dataset(dataset):
+    possible_columns = [
+        ('en', 'ko'),
+        ('eng', 'kor'),
+        ('english', 'korean'),
+    ]
+    for src_col, tgt_col in possible_columns:
+        if src_col in dataset.column_names and tgt_col in dataset.column_names:
+            return dataset.rename_columns({src_col: 'en', tgt_col: 'ko'})
+    raise ValueError("No matching column names found for source and target languages.")
+
+
 # 데이터셋 로드
 korean_parallel_corpora = load_dataset("Moo/korean-parallel-corpora")
-ted_talks_dataset = load_dataset("msarmi9/korean-english-multitarget-ted-talks-task")
+aihub_koen_dataset = load_dataset("traintogpb/aihub-koen-translation-integrated-large-10m")
 
-# 데이터셋 병합
-train_dataset = concatenate_datasets([
-    korean_parallel_corpora["train"],
-    ted_talks_dataset["train"],
-])
-eval_dataset = concatenate_datasets([
-    korean_parallel_corpora["test"],
-    ted_talks_dataset["validation"],
-])
+
+# 랜덤하게 데이터셋을 90% 학습용, 10% 검증용으로 분할
+def random_split(dataset, train_split=0.9):
+    return dataset.train_test_split(test_size=1 - train_split)
+
+
+# 데이터셋에 train/validation이 존재하는지 확인 후 처리
+def split_or_use_existing(dataset, split_ratio=0.9):
+    if "train" in dataset and "validation" in dataset:
+        # 이미 train과 validation이 있는 경우 그대로 사용
+        return dataset["train"], dataset["validation"]
+    else:
+        # 없는 경우 랜덤 분할
+        split_dataset = random_split(dataset["train"], train_split=split_ratio)
+        return split_dataset["train"], split_dataset["test"]
+
+
+# 각 데이터셋에 대해 분할 또는 기존 데이터 사용
+korean_parallel_corpora_train, korean_parallel_corpora_validation = split_or_use_existing(korean_parallel_corpora)
+aihub_koen_dataset_train, aihub_koen_dataset_validation = split_or_use_existing(aihub_koen_dataset)
+
+# 컬럼 이름 맞추기 및 병합
+train_datasets = [
+    preprocess_dataset(korean_parallel_corpora_train),
+    preprocess_dataset(aihub_koen_dataset_train),
+]
+
+eval_datasets = [
+    preprocess_dataset(korean_parallel_corpora_validation),
+    preprocess_dataset(aihub_koen_dataset_validation),
+]
+
+train_dataset = concatenate_datasets(train_datasets)
+eval_dataset = concatenate_datasets(eval_datasets)
+
+# 데이터셋 크기 제한 (예: 1,000,000 예제로 제한)
+max_train_samples = 1_000_000
+max_eval_samples = 100_000
+
+train_dataset = train_dataset.shuffle(seed=42).select(range(min(len(train_dataset), max_train_samples)))
+eval_dataset = eval_dataset.shuffle(seed=42).select(range(min(len(eval_dataset), max_eval_samples)))
 
 
 # None 값 또는 빈 문자열이 포함된 데이터 제거 함수
@@ -74,36 +118,55 @@ def remove_empty_examples(dataset, input_col, target_col):
 
 
 # 훈련 및 검증 데이터셋에서 빈 값이 있는 예제 제거
-train_dataset = remove_empty_examples(train_dataset, 'ko', 'en')
-eval_dataset = remove_empty_examples(eval_dataset, 'ko', 'en')
+train_dataset = remove_empty_examples(train_dataset, 'en', 'ko')
+eval_dataset = remove_empty_examples(eval_dataset, 'en', 'ko')
 
 
-# 데이터 전처리 함수 정의
+# 데이터 전처리 함수
 def preprocess_function(examples):
+    inputs = examples['en']
+    targets = examples['ko']
+
     # 입력과 레이블을 토큰화하고 인코딩
-    model_inputs = tokenizer(examples['ko'], max_length=128, truncation=True, padding="max_length")
-    labels = tokenizer(examples['en'], max_length=128, truncation=True, padding="max_length")
+    model_inputs = tokenizer(inputs, max_length=128, truncation=True, padding="max_length")
+    labels = tokenizer(targets, max_length=128, truncation=True, padding="max_length")
 
     model_inputs["labels"] = labels["input_ids"]
     return model_inputs
 
 
-# 데이터셋 전처리
-tokenized_train_dataset = train_dataset.map(
-    preprocess_function,
-    batched=True,
-    remove_columns=train_dataset.column_names,
-)
-tokenized_eval_dataset = eval_dataset.map(
-    preprocess_function,
-    batched=True,
-    remove_columns=eval_dataset.column_names,
-)
+# 데이터셋 저장 경로 설정
+processed_train_dataset_path = os.path.join(log_dir, "tokenized_train_dataset")
+processed_eval_dataset_path = os.path.join(log_dir, "tokenized_eval_dataset")
+
+# 전처리된 데이터셋이 이미 저장되어 있는지 확인하고, 있으면 불러오기
+if os.path.exists(processed_train_dataset_path) and os.path.exists(processed_eval_dataset_path):
+    logging.info("Loading preprocessed datasets from disk...")
+    tokenized_train_dataset = load_from_disk(processed_train_dataset_path)
+    tokenized_eval_dataset = load_from_disk(processed_eval_dataset_path)
+else:
+    logging.info("Preprocessing datasets...")
+    tokenized_train_dataset = train_dataset.map(
+        preprocess_function,
+        batched=True,
+        remove_columns=train_dataset.column_names,
+        num_proc=4,
+        desc="Tokenizing training data",
+    )
+    tokenized_eval_dataset = eval_dataset.map(
+        preprocess_function,
+        batched=True,
+        remove_columns=eval_dataset.column_names,
+        num_proc=4,
+        desc="Tokenizing evaluation data",
+    )
+
+    tokenized_train_dataset.save_to_disk(processed_train_dataset_path)
+    tokenized_eval_dataset.save_to_disk(processed_eval_dataset_path)
 
 # 평가 메트릭 설정
 bleu_metric = evaluate.load("sacrebleu")
 meteor_metric = evaluate.load("meteor")
-rouge_metric = evaluate.load("rouge")
 
 
 def compute_metrics(eval_preds):
@@ -116,12 +179,10 @@ def compute_metrics(eval_preds):
     decoded_labels_bleu = [[label] for label in decoded_labels]
     bleu_result = bleu_metric.compute(predictions=decoded_preds, references=decoded_labels_bleu)
     meteor_result = meteor_metric.compute(predictions=decoded_preds, references=decoded_labels)
-    rouge_result = rouge_metric.compute(predictions=decoded_preds, references=decoded_labels)
 
     return {
         "bleu": bleu_result["score"],
-        "meteor": meteor_result["meteor"],
-        "rouge": rouge_result["rougeL"].mid.fmeasure
+        "meteor": meteor_result["meteor"]
     }
 
 
@@ -136,7 +197,7 @@ data_collator = DataCollatorForSeq2Seq(
 )
 
 # 조기 종료 콜백 설정
-early_stopping_callback = EarlyStoppingCallback(early_stopping_patience=3)
+early_stopping_callback = EarlyStoppingCallback(early_stopping_patience=4)
 
 # 체크포인트 경로 확인 및 설정
 checkpoint_dir = None
@@ -150,11 +211,12 @@ training_args = Seq2SeqTrainingArguments(
     save_strategy="epoch",
     save_steps=500,
     logging_strategy="steps",
-    logging_steps=50,
+    logging_steps=500,
     per_device_train_batch_size=32,
     per_device_eval_batch_size=32,
-    num_train_epochs=50,
+    num_train_epochs=30,
     learning_rate=5e-5,
+    weight_decay=0.01,
     save_total_limit=5,
     predict_with_generate=True,
     generation_max_length=128,
@@ -162,8 +224,7 @@ training_args = Seq2SeqTrainingArguments(
     load_best_model_at_end=True,
     metric_for_best_model="eval_loss",
     greater_is_better=False,
-    lr_scheduler_type="linear",
-    warmup_steps=500,
+    lr_scheduler_type="cosine",
 )
 
 
@@ -191,9 +252,12 @@ trainer = CustomSeq2SeqTrainer(
 # 모델 훈련 (체크포인트 있을 시, 체크포인트에서 학습 재개)
 trainer.train(resume_from_checkpoint=checkpoint_dir)
 
-# 모델 저장
-trainer.save_model(os.path.join(log_dir, "trained_model"))
-tokenizer.save_pretrained(os.path.join(log_dir, "trained_model"))
+# 모델 양자화(Quantization) 경량화
+quantized_model = torch.quantization.quantize_dynamic(
+    model, {torch.nn.Linear}, dtype=torch.qint8
+)
+quantized_model.save_pretrained(os.path.join(log_dir, "quantized_model"))
+tokenizer.save_pretrained(os.path.join(log_dir, "quantized_model"))
 
 
 # 학습 및 평가 손실 그래프 그리기
@@ -214,5 +278,5 @@ def plot_loss(log_history, save_path):
     plt.close()
 
 
-# 그래프 저장
-plot_loss(trainer.state.log_history, os.path.join(log_dir, f"loss_plot_{current_file_name}_{timestamp}.png"))
+# 손실 그래프 저장
+plot_loss(trainer.state.log_history, os.path.join(log_dir, "loss_plot.png"))
