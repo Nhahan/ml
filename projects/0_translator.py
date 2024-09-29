@@ -8,8 +8,8 @@ import numpy as np
 import torch
 from datasets import load_dataset, concatenate_datasets
 from transformers import (
-    BertTokenizerFast,
-    EncoderDecoderModel,
+    MarianTokenizer,
+    MarianMTModel,
     Seq2SeqTrainer,
     Seq2SeqTrainingArguments,
     EarlyStoppingCallback,
@@ -42,33 +42,16 @@ else:
     logging.info(f"Using device: {device}")
 
 # 토크나이저 로드
-tokenizer = BertTokenizerFast.from_pretrained("bert-base-multilingual-cased")
-
-# pad_token 설정 확인 및 설정
-if tokenizer.pad_token is None:
-    tokenizer.pad_token = tokenizer.eos_token
+model_name = "Helsinki-NLP/opus-mt-ko-en"
+tokenizer = MarianTokenizer.from_pretrained(model_name)
 
 # 모델 로드 및 설정
-model = EncoderDecoderModel.from_encoder_decoder_pretrained(
-    "bert-base-multilingual-cased",
-    "bert-base-multilingual-cased"
-)
+model = MarianMTModel.from_pretrained(model_name)
+model.to(device)
 
 # 모델 설정 조정
-model.config.pad_token_id = tokenizer.pad_token_id
-model.config.decoder_start_token_id = tokenizer.cls_token_id
-model.config.eos_token_id = tokenizer.sep_token_id
 model.config.max_length = 128
 model.config.no_repeat_ngram_size = 3
-
-# 모델 크기 감소를 위한 설정
-model.config.hidden_size = 256
-model.config.num_hidden_layers = 4
-model.config.num_attention_heads = 4
-model.config.encoder_ffn_dim = 512
-model.config.decoder_ffn_dim = 512
-
-model.to(device)
 
 # 데이터셋 로드
 korean_parallel_corpora = load_dataset("Moo/korean-parallel-corpora")
@@ -85,30 +68,21 @@ eval_dataset = concatenate_datasets([
 ])
 
 
+# None 값 또는 빈 문자열이 포함된 데이터 제거 함수
+def remove_empty_examples(dataset, input_col, target_col):
+    return dataset.filter(lambda x: x[input_col] and x[target_col] and x[input_col].strip() and x[target_col].strip())
+
+
+# 훈련 및 검증 데이터셋에서 빈 값이 있는 예제 제거
+train_dataset = remove_empty_examples(train_dataset, 'ko', 'en')
+eval_dataset = remove_empty_examples(eval_dataset, 'ko', 'en')
+
+
 # 데이터 전처리 함수 정의
 def preprocess_function(examples):
-    if 'ko' in examples and 'en' in examples:
-        inputs = examples['ko']
-        targets = examples['en']
-    elif 'korean' in examples and 'english' in examples:
-        inputs = examples['korean']
-        targets = examples['english']
-    else:
-        raise ValueError("Unexpected column names in dataset!")
-
-    # inputs와 targets이 리스트 형식인지 확인하고, 그렇지 않으면 리스트로 변환
-    if isinstance(inputs, str):
-        inputs = [inputs]
-    if isinstance(targets, str):
-        targets = [targets]
-
-    # 빈 값이나 None이 있는 경우 필터링 (None 또는 빈 문자열을 " "로 대체)
-    inputs = [input_text if input_text else " " for input_text in inputs]
-    targets = [target_text if target_text else " " for target_text in targets]
-
     # 입력과 레이블을 토큰화하고 인코딩
-    model_inputs = tokenizer(inputs, max_length=128, truncation=True, padding="max_length")
-    labels = tokenizer(targets, max_length=128, truncation=True, padding="max_length")
+    model_inputs = tokenizer(examples['ko'], max_length=128, truncation=True, padding="max_length")
+    labels = tokenizer(examples['en'], max_length=128, truncation=True, padding="max_length")
 
     model_inputs["labels"] = labels["input_ids"]
     return model_inputs
@@ -162,7 +136,7 @@ data_collator = DataCollatorForSeq2Seq(
 )
 
 # 조기 종료 콜백 설정
-early_stopping_callback = EarlyStoppingCallback(early_stopping_patience=2)
+early_stopping_callback = EarlyStoppingCallback(early_stopping_patience=3)
 
 # 체크포인트 경로 확인 및 설정
 checkpoint_dir = None
@@ -177,10 +151,10 @@ training_args = Seq2SeqTrainingArguments(
     save_steps=500,
     logging_strategy="steps",
     logging_steps=50,
-    per_device_train_batch_size=28,
-    per_device_eval_batch_size=28,
-    num_train_epochs=5,
-    learning_rate=3e-4,
+    per_device_train_batch_size=32,
+    per_device_eval_batch_size=32,
+    num_train_epochs=50,
+    learning_rate=5e-5,
     save_total_limit=5,
     predict_with_generate=True,
     generation_max_length=128,
@@ -188,6 +162,8 @@ training_args = Seq2SeqTrainingArguments(
     load_best_model_at_end=True,
     metric_for_best_model="eval_loss",
     greater_is_better=False,
+    lr_scheduler_type="linear",
+    warmup_steps=500,
 )
 
 
