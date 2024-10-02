@@ -1,8 +1,9 @@
 2024-09-30 02:10:48,919 - INFO - Using device: cuda (GPU: NVIDIA GeForce RTX 2080 SUPER, Memory: 7 GB)
 2024-09-30 02:10:57,917 - INFO - Loading preprocessed datasets from disk...
-{'loss': 0.7183, 'grad_norm': 0.1996103674173355, 'learning_rate': 4.999999669155866e-05, 'epoch': 0.0016608481619393393}
-{'loss': 0.0956, 'grad_norm': 0.13096952438354492, 'learning_rate': 4.999998657766518e-05, 'epoch': 0.0033216963238786785}
-{'loss': 0.0875, 'grad_norm': 0.11438388377428055, 'learning_rate': 4.999996965765531e-05, 'epoch': 0.004982544485818018}
+2024-10-02 08:20:07,496 - WARNING - That's 100 lines that end in a tokenized period ('.')
+2024-10-02 08:20:07,496 - WARNING - It looks like you forgot to detokenize your test data, which may hurt your score.
+2024-10-02 08:20:07,496 - WARNING - If you insist your data is detokenized, or don't care, you can suppress this message with the `force` parameter.
+5818018}
 {'loss': 0.0826, 'grad_norm': 0.14187999069690704, 'learning_rate': 4.999994593153365e-05, 'epoch': 0.006643392647757357}
 {'loss': 0.0806, 'grad_norm': 0.1290454864501953, 'learning_rate': 4.999991539930668e-05, 'epoch': 0.008304240809696696}
 {'loss': 0.0783, 'grad_norm': 0.1829233467578888, 'learning_rate': 4.99998780609827e-05, 'epoch': 0.009965088971636036}
@@ -602,3 +603,42 @@
 {'loss': 0.0494, 'grad_norm': 0.13837555050849915, 'learning_rate': 4.8785843555489324e-05, 'epoch': 0.9965088971636035}
 {'loss': 0.0487, 'grad_norm': 0.0628712996840477, 'learning_rate': 4.8781824592213886e-05, 'epoch': 0.9981697453255428}
 {'loss': 0.0482, 'grad_norm': 0.12860123813152313, 'learning_rate': 4.877780721179664e-05, 'epoch': 0.9998305934874822}
+
+---
+
+{'eval_loss': 0.045076675713062286, 'eval_bleu': 3.969887792866861, 'eval_meteor': 0.40040647558230064, 'eval_runtime': 154282.5271, 'eval_samples_per_second': 6.758, 'eval_steps_per_second': 0.241, 'epoch': 1.0}
+
+eval_loss:
+    의미: 평가 데이터셋에 대한 손실 값입니다. 손실 값은 모델이 예측한 값과 실제 정답 사이의 차이를 수치화한 값입니다. 일반적으로 손실 값이 낮을수록 모델의 성능이 더 좋다고 평가됩니다.
+    현재 값: 0.045. 매우 낮은 손실 값으로, 모델이 평가 데이터셋에서 비교적 정확한 예측을 하고 있음을 나타냅니다.
+eval_bleu:
+
+    의미: BLEU(Bilingual Evaluation Understudy) 점수로, 기계 번역에서 자주 사용되는 평가 지표입니다. 번역된 텍스트가 실제 정답과 얼마나 일치하는지를 수치화하며, 일반적으로 0에서 100 사이의 값입니다. BLEU 점수가 높을수록 번역 성능이 좋습니다.
+    현재 값: 3.97. BLEU 점수가 매우 낮은 편입니다. 보통 BLEU가 20 이상이면 어느 정도 의미 있는 번역을 한다고 평가합니다. 이 점수는 모델이 정확한 번역을 생성하는 데 아직 부족함이 있음을 나타냅니다.
+eval_meteor:
+    의미: METEOR(Metric for Evaluation of Translation with Explicit ORdering) 점수는 BLEU보다 좀 더 발전된 번역 평가 지표로, 동의어나 문장 구조를 고려합니다. 0에서 1 사이의 값으로 나타나며, 값이 높을수록 번역 성능이 좋습니다.
+    현재 값: 0.4004. METEOR 점수는 0.4로 나쁘지 않지만, 매우 높은 수준은 아닙니다. 일반적으로 0.6 이상의 METEOR 점수가 좋은 성능을 나타냅니다. 이 값은 모델이 어느 정도 의미 있는 번역을 하지만, 여전히 개선의 여지가 있음을 나타냅니다.
+eval_runtime:
+    의미: 평가 과정에 소요된 총 시간(초)입니다.
+    현재 값: 154282.5271 초, 즉 약 42.8시간입니다. 평가가 상당한 시간 동안 진행되었음을 보여줍니다.
+eval_samples_per_second:
+    의미: 초당 처리된 평가 샘플 수입니다.
+    현재 값: 6.758. 이 값은 초당 약 6.76개의 샘플을 평가했다는 뜻입니다. 처리 속도는 평가에 사용된 데이터셋 크기와 모델의 복잡도에 따라 달라집니다.
+eval_steps_per_second:
+    의미: 초당 처리된 평가 스텝 수입니다.
+    현재 값: 0.241. 초당 약 0.24개의 평가 스텝이 처리되었습니다. 이는 전체 평가 프로세스의 속도를 나타냅니다.
+epoch:
+    의미: 현재 학습이 진행된 에포크(epoch) 수입니다.
+    현재 값: 1.0. 이는 첫 번째 에포크가 끝난 후 평가한 결과임을 나타냅니다.
+
+---
+
+input:
+    t5_small_model size: 230.83 MB
+
+output:
+    모델의 용량: 693.47 MB
+    한국어 문장: 안녕하세요. 반갑습니다.
+    번역된 영어 문장: .
+    영어 문장: Hello. Nice to meet you.
+    번역된 한국어 문장: , .
