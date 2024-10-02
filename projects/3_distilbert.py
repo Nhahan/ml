@@ -1,6 +1,7 @@
-import logging
 import os
 import sys
+import logging
+from tqdm import tqdm
 
 import matplotlib.pyplot as plt
 import torch
@@ -8,9 +9,9 @@ from datasets import load_dataset, load_from_disk
 from torch import nn
 from torch.optim import Adam
 from torch.utils.data import DataLoader
-from tqdm import tqdm
 from transformers import DistilBertTokenizer, DistilBertModel
 
+# Logging configuration
 code_filename = 'fine_tune_distilbert_ag_news'
 result_dir = './result/3_basic/'
 os.makedirs(result_dir, exist_ok=True)
@@ -36,6 +37,7 @@ else:
     ds = load_dataset("fancyzhx/ag_news")
     ds.save_to_disk(dataset_path)
 
+
 def get_directory_size_mb(path):
     total_size = 0
     for dirpath, dirnames, filenames in os.walk(path):
@@ -44,6 +46,7 @@ def get_directory_size_mb(path):
             if os.path.exists(fp):
                 total_size += os.path.getsize(fp)
     return total_size / (1024 * 1024)
+
 
 dataset_size_mb = get_directory_size_mb(dataset_path)
 logging.info(f" - Dataset size: {dataset_size_mb:.2f} MB\n")
@@ -58,6 +61,7 @@ else:
 
 tokenizer_size_mb = get_directory_size_mb(tokenizer_path)
 logging.info(f" - Tokenizer size: {tokenizer_size_mb:.2f} MB\n")
+
 
 def collate_fn(batch):
     max_len = 400  # Adjust if necessary
@@ -74,12 +78,14 @@ def collate_fn(batch):
 
     return input_ids, attention_mask, labels
 
+
 train_loader = DataLoader(
     ds['train'], batch_size=64, shuffle=True, collate_fn=collate_fn
 )
 test_loader = DataLoader(
     ds['test'], batch_size=64, shuffle=False, collate_fn=collate_fn
 )
+
 
 class TextClassifier(nn.Module):
     def __init__(self, num_classes=4):
@@ -92,6 +98,7 @@ class TextClassifier(nn.Module):
         cls_output = outputs.last_hidden_state[:, 0]  # [CLS] token output
         logits = self.classifier(cls_output)
         return logits
+
 
 model = TextClassifier(num_classes=4)
 
@@ -106,6 +113,7 @@ loss_fn = nn.CrossEntropyLoss()
 optimizer = Adam(model.classifier.parameters(), lr=0.001)
 
 n_epochs = 10
+
 
 def accuracy(model, dataloader):
     model.eval()
@@ -125,6 +133,7 @@ def accuracy(model, dataloader):
             total += labels.size(0)
 
     return correct / total
+
 
 train_losses = []
 
@@ -182,5 +191,9 @@ logging.info(f"Loss plot saved to {plot_file}")
 model_save_path = os.path.join(result_dir, f"{code_filename}_model.pth")
 torch.save(model.state_dict(), model_save_path)
 logging.info(f"Model saved to {model_save_path}.")
+
+# Measure and log model size
+model_size_mb = os.path.getsize(model_save_path) / (1024 * 1024)
+logging.info(f" - Model size: {model_size_mb:.2f} MB\n")
 
 logging.info("Training completed.")
