@@ -246,7 +246,7 @@ trainer = CustomSeq2SeqTrainer(
     eval_dataset=tokenized_eval_dataset,
     tokenizer=tokenizer,
     data_collator=data_collator,
-    compute_metrics=compute_metrics,
+    # compute_metrics=compute_metrics,
     callbacks=[early_stopping_callback],
 )
 
