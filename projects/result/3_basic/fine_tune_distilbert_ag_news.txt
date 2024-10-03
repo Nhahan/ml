@@ -1,0 +1,21 @@
+2024-10-03 02:28:50,443 - INFO - Epoch 1/10 | Train Loss: 0.3548
+2024-10-03 02:42:15,432 - INFO - =========> Train Accuracy: 0.895 | Test Accuracy: 0.892
+2024-10-03 02:55:16,678 - INFO - Epoch 2/10 | Train Loss: 0.2951
+2024-10-03 03:08:23,816 - INFO - =========> Train Accuracy: 0.901 | Test Accuracy: 0.899
+2024-10-03 03:21:23,146 - INFO - Epoch 3/10 | Train Loss: 0.2873
+2024-10-03 03:33:25,217 - INFO - =========> Train Accuracy: 0.905 | Test Accuracy: 0.902
+2024-10-03 03:37:54,099 - INFO - Epoch 4/10 | Train Loss: 0.2835
+2024-10-03 03:42:28,108 - INFO - =========> Train Accuracy: 0.904 | Test Accuracy: 0.902
+2024-10-03 03:46:57,888 - INFO - Epoch 5/10 | Train Loss: 0.2794
+2024-10-03 03:51:31,676 - INFO - =========> Train Accuracy: 0.905 | Test Accuracy: 0.902
+2024-10-03 03:56:00,300 - INFO - Epoch 6/10 | Train Loss: 0.2765
+2024-10-03 04:00:34,452 - INFO - =========> Train Accuracy: 0.906 | Test Accuracy: 0.902
+2024-10-03 04:05:04,039 - INFO - Epoch 7/10 | Train Loss: 0.2768
+2024-10-03 04:09:37,901 - INFO - =========> Train Accuracy: 0.908 | Test Accuracy: 0.905
+2024-10-03 04:14:07,379 - INFO - Epoch 8/10 | Train Loss: 0.2743
+2024-10-03 04:18:40,852 - INFO - =========> Train Accuracy: 0.908 | Test Accuracy: 0.906
+2024-10-03 04:23:09,747 - INFO - Epoch 9/10 | Train Loss: 0.2744
+2024-10-03 04:27:42,967 - INFO - =========> Train Accuracy: 0.907 | Test Accuracy: 0.903
+2024-10-03 04:32:12,206 - INFO - Epoch 10/10 | Train Loss: 0.2731
+2024-10-03 04:36:48,539 - INFO - =========> Train Accuracy: 0.908 | Test Accuracy: 0.906
+2024-10-03 04:36:48,539 - INFO - =========> Final Train Accuracy: 0.908 | Final Test Accuracy: 0.906
