@@ -1,11 +1,10 @@
-import random
-import evaluate
-import numpy as np
 import logging
-import sys
 import os
-import matplotlib.pyplot as plt
+import sys
 
+import evaluate
+import matplotlib.pyplot as plt
+import numpy as np
 from datasets import load_dataset
 from transformers import (
     AutoTokenizer,
