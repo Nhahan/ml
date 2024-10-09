@@ -81,7 +81,7 @@ training_args = TrainingArguments(
     learning_rate=1e-4,  # optimizer에 사용할 learning rate
     load_best_model_at_end=True,  # 학습이 끝난 후, validation data에 대한 성능이 가장 좋은 모델을 채택하겠다는 의미
     logging_dir="./logs",  # TensorBoard log directory
-    report_to=["tensorboard"],
+    report_to=[],  # TensorBoard 사용하지 않도록 설정
 )
 
 # 평가 함수
