@@ -41,8 +41,10 @@ ag_news = load_dataset("ag_news")
 logger.info("Preparing tokenizer...")
 tokenizer = AutoTokenizer.from_pretrained("distilbert-base-uncased")
 
+
 def preprocess_function(data):
     return tokenizer(data["text"], truncation=True)
+
 
 logger.info("Tokenizing dataset...")
 ag_news_tokenized = ag_news.map(preprocess_function, batched=True)
@@ -85,10 +87,12 @@ training_args = TrainingArguments(
 # 평가 함수
 eval_metric = evaluate.load("accuracy")
 
+
 def compute_metrics(pred):
     predictions, labels = pred
     predictions = np.argmax(predictions, axis=1)
     return eval_metric.compute(predictions=predictions, references=labels)
+
 
 # Trainer 설정
 logger.info("Initializing trainer...")
