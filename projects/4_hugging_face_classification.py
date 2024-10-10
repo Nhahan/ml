@@ -122,18 +122,18 @@ test_result = trainer.evaluate(ag_news_test)
 logger.info(f"Test Accuracy: {test_result['eval_accuracy']:.4f}")
 
 # 결과 그래프 저장
-logger.info("Saving result graph...")
-train_loss = train_result.training_losses
-plt.plot(train_loss, label="Train Loss")
-plt.xlabel("Epoch")
-plt.ylabel("Loss")
-plt.title("Training Loss Over Epochs")
-plt.legend()
-plt.savefig(f"{filename}.png")
+# logger.info("Saving result graph...")
+# train_loss = train_result.training_losses
+# plt.plot(train_loss, label="Train Loss")
+# plt.xlabel("Epoch")
+# plt.ylabel("Loss")
+# plt.title("Training Loss Over Epochs")
+# plt.legend()
+# plt.savefig(f"{filename}.png")
 
 # 예시 예측
-logger.info("Predicting sample text...")
-classifier = pipeline("text-classification", model=model, tokenizer=tokenizer, device=-1)
-sample_text = "UK charges 8 in terror plot linked to alert in US LONDON, AUGUST 17: Britain charged eight terror suspects on Tuesday with conspiracy to commit murder and said one had plans that could be used in striking US buildings that were the focus of security scares this month."
-prediction = classifier(sample_text)
-logger.info(f"Prediction: {prediction}")
+# logger.info("Predicting sample text...")
+# classifier = pipeline("text-classification", model=model, tokenizer=tokenizer, device=-1)
+# sample_text = "UK charges 8 in terror plot linked to alert in US LONDON, AUGUST 17: Britain charged eight terror suspects on Tuesday with conspiracy to commit murder and said one had plans that could be used in striking US buildings that were the focus of security scares this month."
+# prediction = classifier(sample_text)
+# logger.info(f"Prediction: {prediction}")
