@@ -3,7 +3,6 @@ import os
 import sys
 
 import evaluate
-import matplotlib.pyplot as plt
 import numpy as np
 from datasets import load_dataset
 from transformers import (
@@ -11,7 +10,6 @@ from transformers import (
     AutoModelForSequenceClassification,
     TrainingArguments,
     Trainer,
-    pipeline,
     EarlyStoppingCallback
 )
 
