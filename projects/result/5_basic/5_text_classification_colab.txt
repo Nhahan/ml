@@ -1,0 +1,28 @@
+레이블 이름: ['World', 'Sports', 'Business', 'Sci/Tech']
+예측 중:   0%|          | 0/50 [00:00<?, ?it/s]Starting from v4.46, the `logits` model output will have the same type as the model (except at train time, where it will always be FP32)
+예측 중: 100%|██████████| 50/50 [00:09<00:00,  5.48it/s]
+<ipython-input-1-5abb89116d07>:113: UserWarning: Glyph 49368 (\N{HANGUL SYLLABLE SAEM}) missing from current font.
+  plt.savefig(f'{drive_log_dir}/{current_file_name}.png')
+<ipython-input-1-5abb89116d07>:113: UserWarning: Glyph 54540 (\N{HANGUL SYLLABLE PEUL}) missing from current font.
+  plt.savefig(f'{drive_log_dir}/{current_file_name}.png')
+<ipython-input-1-5abb89116d07>:113: UserWarning: Glyph 49688 (\N{HANGUL SYLLABLE SU}) missing from current font.
+  plt.savefig(f'{drive_log_dir}/{current_file_name}.png')
+<ipython-input-1-5abb89116d07>:113: UserWarning: Glyph 51221 (\N{HANGUL SYLLABLE JEONG}) missing from current font.
+  plt.savefig(f'{drive_log_dir}/{current_file_name}.png')
+<ipython-input-1-5abb89116d07>:113: UserWarning: Glyph 54869 (\N{HANGUL SYLLABLE HWAG}) missing from current font.
+  plt.savefig(f'{drive_log_dir}/{current_file_name}.png')
+<ipython-input-1-5abb89116d07>:113: UserWarning: Glyph 46020 (\N{HANGUL SYLLABLE DO}) missing from current font.
+  plt.savefig(f'{drive_log_dir}/{current_file_name}.png')
+정확도: 66.00%
+/usr/local/lib/python3.10/dist-packages/IPython/core/pylabtools.py:151: UserWarning: Glyph 49368 (\N{HANGUL SYLLABLE SAEM}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+/usr/local/lib/python3.10/dist-packages/IPython/core/pylabtools.py:151: UserWarning: Glyph 54540 (\N{HANGUL SYLLABLE PEUL}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+/usr/local/lib/python3.10/dist-packages/IPython/core/pylabtools.py:151: UserWarning: Glyph 49688 (\N{HANGUL SYLLABLE SU}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+/usr/local/lib/python3.10/dist-packages/IPython/core/pylabtools.py:151: UserWarning: Glyph 51221 (\N{HANGUL SYLLABLE JEONG}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+/usr/local/lib/python3.10/dist-packages/IPython/core/pylabtools.py:151: UserWarning: Glyph 54869 (\N{HANGUL SYLLABLE HWAG}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+/usr/local/lib/python3.10/dist-packages/IPython/core/pylabtools.py:151: UserWarning: Glyph 46020 (\N{HANGUL SYLLABLE DO}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
